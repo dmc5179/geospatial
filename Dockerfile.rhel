@@ -1,0 +1,37 @@
+#FROM rocker/verse:3.5.3
+FROM localhost/rhel7/rocker/r-ver
+MAINTAINER "Dan Clark" danclark@redhat.com
+
+RUN yum -y install \
+    bzip2-devel \
+    fftw-devel \
+    gdal-devel \
+    geos-devel \
+    gsl-devel \
+#    libgl1-mesa-dev \
+#    libglu1-mesa-dev \
+#    libhdf4-alt-dev \
+     hdf \
+     hdf5 \
+     hdf5-devel \
+    jq-devel \
+#    liblwgeom-dev \
+    libpqxx-devel \
+    proj-devel \
+    protobuf-devel \
+    netcdf-devel \
+    sqlite3-devel \
+    openssl-devel \
+    udunits2-devel \
+    netcdf \
+    postgis \
+    protobuf-compiler \
+    sqlite \
+    tk-devel \
+    unixODBC-devel \
+  && Rscript --verbose -e 'install.packages(c("RColorBrewer", "RandomFields", "RNetCDF", \ 
+     "classInt", "deldir", "gstat", "hdf5r", "lidR", "mapdata", "maptools", \
+     "mapview", ncdf4", "proj4", "raster", "rgdal", "rgeos", "rlas", "sf", "sp", \
+     "spacetime", "spatstat", "spdep", "geoR", "geosphere"), repos="http://cran.us.r-project.org")'  \
+  ## from bioconductor
+  && R -e "BiocManager::install('rhdf5')"
